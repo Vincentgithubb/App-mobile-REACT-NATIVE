@@ -4,17 +4,21 @@ import HomeStack from './stacks/HomeStack'
 import GamesStack from './stacks/GamesStack'
 import OptionStack from './stacks/OptionStack'
 import { NavigationContainer } from '@react-navigation/native'
+import { ScrollView, Text, View, TextInput, Image, StyleSheet } from 'react-native'
+import TabStack from './organization/tabStack'
+
+const styles = StyleSheet.create({
+  navbar: {
+    backgroundColor: '#271C4D'
+  }
+})
 
 const NavStack = createBottomTabNavigator()
 
 export default function App() {
   return (
     <NavigationContainer>
-      <NavStack.Navigator screenOptions={{ headerShown: false }}>
-        <NavStack.Screen name="home" component={HomeStack} />
-        <NavStack.Screen name="games" component={GamesStack} />
-        <NavStack.Screen name="option" component={OptionStack} />
-      </NavStack.Navigator>
+      <TabStack />
     </NavigationContainer>
   )
 }

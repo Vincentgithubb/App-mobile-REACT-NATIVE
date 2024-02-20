@@ -3,6 +3,7 @@ import { ScrollView, Text, View, TextInput, Image, StyleSheet } from 'react-nati
 import { getAllGames } from '../services/api/games/request'
 import GameComponent from '../components/GameComponent'
 import Header from '../components/Header'
+import { Game } from '../types/types'
 
 const styles = StyleSheet.create({
   searchInput: {
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
   }
 })
 
-export default function Games() {
+export default function Games({ navigation }: { navigation: any }) {
   const [games, setGames] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -32,7 +33,11 @@ export default function Games() {
     })
   }, [])
 
-  const filteredGames = games.filter((game) => game.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredGames = games.filter((game: Game) => game.title.toLowerCase().includes(searchTerm.toLowerCase()))
+
+  const navigateToDetails = (id: number) => {
+    navigation.navigate('Details', { id })
+  }
 
   return (
     <ScrollView style={styles.background}>
@@ -44,7 +49,7 @@ export default function Games() {
         value={searchTerm}
         onChangeText={setSearchTerm}
       />
-      <GameComponent games={filteredGames} />
+      <GameComponent games={filteredGames} navigateToDetails={navigateToDetails} />
     </ScrollView>
   )
 }

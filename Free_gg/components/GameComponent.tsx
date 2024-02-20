@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { Game } from '../types/types'
 
 const styles = StyleSheet.create({
   card: {
@@ -29,17 +30,25 @@ const styles = StyleSheet.create({
   }
 })
 
-export default function GameComponent({ games }) {
+export default function GameComponent({
+  games,
+  navigateToDetails
+}: {
+  games: Game[]
+  navigateToDetails: (id: number) => void
+}) {
   return (
     <View>
       <Text style={styles.title}>ALL</Text>
       <View style={styles.cardcontainer}>
         {games.map((game) => {
           return (
-            <View style={styles.card}>
-              <Image source={{ uri: game.thumbnail }} style={{ width: 153, height: 162, borderRadius: 15 }} />
-              <Text style={{ color: 'white', fontWeight: 'bold' }}>{game.title}</Text>
-            </View>
+            <TouchableOpacity key={game.id} onPress={() => navigateToDetails(game.id)}>
+              <View style={styles.card}>
+                <Image source={{ uri: game.thumbnail }} style={{ width: 153, height: 162, borderRadius: 15 }} />
+                <Text style={{ color: 'white', fontWeight: 'bold' }}>{game.title}</Text>
+              </View>
+            </TouchableOpacity>
           )
         })}
       </View>
