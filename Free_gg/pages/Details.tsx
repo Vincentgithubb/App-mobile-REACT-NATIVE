@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Text, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { getGameDetails } from '../services/api/games/request_details'
 import Header from '../components/Header'
+import GameDetails from '../components/GameDetails'
 
 export default function Details({ route }: { route: any }) {
   const { id }: { id: number } = route.params
@@ -14,9 +15,10 @@ export default function Details({ route }: { route: any }) {
   }, [])
 
   return (
-    <View>
+    <ScrollView style={{ backgroundColor: '#271C4D' }}>
       <Header />
       <Text>Details</Text>
-    </View>
+      <GameDetails game={details && GameDetails} />
+    </ScrollView>
   )
 }
