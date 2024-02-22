@@ -5,7 +5,7 @@ import GamesStack from './stacks/GamesStack'
 import OptionStack from './stacks/OptionStack'
 import { NavigationContainer } from '@react-navigation/native'
 import { ScrollView, Text, View, TextInput, Image, StyleSheet } from 'react-native'
-import TabStack from './organization/TabStack'
+import { TabStack } from './organization/TabStack'
 
 const styles = StyleSheet.create({
   navbar: {

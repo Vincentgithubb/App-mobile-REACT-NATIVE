@@ -7,7 +7,7 @@ const Stack = createNativeStackNavigator()
 export default function OptionStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, statusBarHidden: true }}>
-      <Stack.Screen name="Option" component={Option} />
+      <Stack.Screen name="OptionPage" component={Option} />
     </Stack.Navigator>
   )
 }

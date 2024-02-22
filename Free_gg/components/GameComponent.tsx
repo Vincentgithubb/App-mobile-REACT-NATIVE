@@ -14,8 +14,8 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    margin: 45,
-    marginTop: 65
+    margin: 40,
+    marginTop: 70
   },
   background: {
     backgroundColor: '#271C4D',

@@ -4,6 +4,7 @@ import { getAllGames } from '../services/api/games/request'
 import GameComponent from '../components/GameComponent'
 import Header from '../components/Header'
 import { Game } from '../types/types'
+import { useBearStore } from '../store/StoreOption'
 
 const styles = StyleSheet.create({
   searchInput: {
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
 export default function Games({ navigation }: { navigation: any }) {
   const [games, setGames] = useState([])
   const [searchTerm, setSearchTerm] = useState('')
+  const { option } = useBearStore()
 
   useEffect(() => {
     getAllGames().then((data) => {
@@ -33,7 +35,14 @@ export default function Games({ navigation }: { navigation: any }) {
     })
   }, [])
 
-  const filteredGames = games.filter((game: Game) => game.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  const filteredGames = games.filter((game: Game) => {
+    const matchesSearchTerm = game.title.toLowerCase().includes(searchTerm.toLowerCase())
+    if (option === 'All') {
+      return matchesSearchTerm
+    } else {
+      return matchesSearchTerm && game.platform === option
+    }
+  })
 
   const navigateToDetails = (id: number) => {
     navigation.navigate('Details', { id })
