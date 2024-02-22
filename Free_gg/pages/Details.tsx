@@ -10,7 +10,7 @@ export default function Details({ route }: { route: any }) {
 
   useEffect(() => {
     getGameDetails(id).then((data) => {
-      setDetails(data)
+      return setDetails(data)
     })
   }, [])
 
@@ -18,7 +18,7 @@ export default function Details({ route }: { route: any }) {
     <ScrollView style={{ backgroundColor: '#271C4D' }}>
       <Header />
       <Text>Details</Text>
-      <GameDetails game={details && GameDetails} />
+      <GameDetails game={details} />
     </ScrollView>
   )
 }
