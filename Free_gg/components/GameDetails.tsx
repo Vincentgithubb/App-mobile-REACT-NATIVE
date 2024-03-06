@@ -1,13 +1,14 @@
 import React, { FC } from 'react'
-import { View, Text, Image, StyleSheet, TouchableOpacity, Linking } from 'react-native'
+import { View, Text, Image, StyleSheet, TouchableOpacity, Linking, ScrollView } from 'react-native'
 import { DetailedGame, Game } from '../types/types'
 import Header from './Header'
 import { useNavigation } from '@react-navigation/native'
 
 const styles = StyleSheet.create({
   infos: { display: 'flex', alignItems: 'center', justifyContent: 'center' },
-  screen: { backgroundColor: '#38256B', height: 400, width: '100%', margin: 20, marginTop: 30 },
-  pics: {}
+  screen: { backgroundColor: '#38256B', height: 600, width: '100%', margin: 20, marginTop: 30 },
+  pics: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10, marginTop: 20 },
+  screenshotImage: { width: 380, height: 300, borderRadius: 10, marginHorizontal: 5 }
 })
 
 interface Props {
@@ -27,9 +28,7 @@ const GameDetails: React.FC<Props> = ({ game, navigateToHome }) => {
     game && (
       <View style={{ marginBottom: '20%' }}>
         <View key={game.id} style={styles.infos}>
-          <TouchableOpacity onPress={() => navigateToHome()}>
-            <Text style={{ fontSize: 35, color: '#2B6692', margin: 10 }}>Details</Text>
-          </TouchableOpacity>
+          <Text style={{ fontSize: 35, color: '#2B6692', margin: 10 }}>Details</Text>
           <Image
             source={{ uri: game.thumbnail }}
             style={{ width: 305, height: 303, borderRadius: 15, marginBottom: 15 }}
@@ -76,13 +75,38 @@ const GameDetails: React.FC<Props> = ({ game, navigateToHome }) => {
                 </View>
               </View>
             </View>
-            <View style={styles.pics}></View>
+            {game.screenshots && game.screenshots.length > 0 && (
+              <ScrollView horizontal>
+                <View style={styles.pics}>
+                  {game.screenshots.map((screenshot) => (
+                    <Image key={screenshot.id} source={{ uri: screenshot.image }} style={styles.screenshotImage} />
+                  ))}
+                </View>
+              </ScrollView>
+            )}
           </View>
-          <View style={styles.infos}>
-            <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20, marginLeft: 20, margin: 10 }}>
-              ---Minimum System Requirements---
-            </Text>
-          </View>
+          {game.minimum_system_requirements && (
+            <View style={styles.infos}>
+              <Text style={{ color: 'white', fontWeight: 'bold', fontSize: 20, marginLeft: 20, margin: 10 }}>
+                ---Minimum System Requirements---
+              </Text>
+              <View style={{ marginHorizontal: 20 }}>
+                <Text style={{ color: 'white', marginVertical: 5 }}>OS: {game.minimum_system_requirements.os}</Text>
+                <Text style={{ color: 'white', marginVertical: 5 }}>
+                  Processor: {game.minimum_system_requirements.processor}
+                </Text>
+                <Text style={{ color: 'white', marginVertical: 5 }}>
+                  Memory: {game.minimum_system_requirements.memory}
+                </Text>
+                <Text style={{ color: 'white', marginVertical: 5 }}>
+                  Graphics: {game.minimum_system_requirements.graphics}
+                </Text>
+                <Text style={{ color: 'white', marginVertical: 5 }}>
+                  Storage: {game.minimum_system_requirements.storage}
+                </Text>
+              </View>
+            </View>
+          )}
         </View>
       </View>
     )

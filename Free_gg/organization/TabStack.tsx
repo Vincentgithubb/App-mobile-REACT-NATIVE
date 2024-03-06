@@ -41,7 +41,7 @@ export const TabStack = () => {
         }
       })}
     >
-      <Tab.Screen name="Home" component={HomeStack} />
+      <Tab.Screen name="Home"  component={HomeStack} />
       <Tab.Screen name="Games" component={GamesStack} />
       <Tab.Screen name="Option" component={OptionStack} />
     </Tab.Navigator>

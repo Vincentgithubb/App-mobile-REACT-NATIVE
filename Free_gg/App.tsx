@@ -4,8 +4,9 @@ import HomeStack from './stacks/HomeStack'
 import GamesStack from './stacks/GamesStack'
 import OptionStack from './stacks/OptionStack'
 import { NavigationContainer } from '@react-navigation/native'
-import { ScrollView, Text, View, TextInput, Image, StyleSheet } from 'react-native'
+import { ScrollView, Text, View, TextInput, Image, StyleSheet, StatusBar } from 'react-native'
 import { TabStack } from './organization/TabStack'
+import { useEffect } from 'react'
 
 const styles = StyleSheet.create({
   navbar: {
@@ -22,3 +23,5 @@ export default function App() {
     </NavigationContainer>
   )
 }
+
+StatusBar.setBarStyle('light-content')

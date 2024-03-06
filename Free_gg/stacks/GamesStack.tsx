@@ -6,7 +6,7 @@ const Stack = createNativeStackNavigator()
 
 export default function GamesStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false, statusBarHidden: true }}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="GamesPage" component={Games} />
       <Stack.Screen name="Details" component={Details} />
     </Stack.Navigator>

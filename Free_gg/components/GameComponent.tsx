@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     margin: 40,
-    marginTop: 70
+    marginTop: 30
   },
   background: {
     backgroundColor: '#271C4D',
@@ -30,28 +30,24 @@ const styles = StyleSheet.create({
   }
 })
 
-export default function GameComponent({
-  games,
-  navigateToDetails
-}: {
+interface GameComponentProps {
   games: Game[]
   navigateToDetails: (id: number) => void
-}) {
+}
+
+const GameComponent: FC<GameComponentProps> = ({ games, navigateToDetails }) => {
   return (
-    <View>
-      <Text style={styles.title}>ALL</Text>
-      <View style={styles.cardcontainer}>
-        {games.map((game) => {
-          return (
-            <TouchableOpacity key={game.id} onPress={() => navigateToDetails(game.id)}>
-              <View style={styles.card}>
-                <Image source={{ uri: game.thumbnail }} style={{ width: 153, height: 162, borderRadius: 15 }} />
-                <Text style={{ color: 'white', fontWeight: 'bold' }}>{game.title}</Text>
-              </View>
-            </TouchableOpacity>
-          )
-        })}
-      </View>
+    <View style={styles.cardcontainer}>
+      {games.map((game) => (
+        <TouchableOpacity key={game.id} onPress={() => navigateToDetails(game.id)}>
+          <View style={styles.card}>
+            <Image source={{ uri: game.thumbnail }} style={{ width: 153, height: 162, borderRadius: 15 }} />
+            <Text style={{ color: 'white', fontWeight: 'bold' }}>{game.title}</Text>
+          </View>
+        </TouchableOpacity>
+      ))}
     </View>
   )
 }
+
+export default GameComponent

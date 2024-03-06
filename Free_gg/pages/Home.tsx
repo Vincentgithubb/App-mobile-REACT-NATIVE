@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: 'grey',
-    fontSize: 20,
+    fontSize: 15,
     marginLeft: 8,
     marginTop: 4,
     paddingBottom: 30
@@ -67,7 +67,7 @@ export default function Home({ navigation }: { navigation: any }) {
       <Header />
       <View style={styles.display}>
         <Text style={styles.title}>10 Random Games</Text>
-        <FontAwesomeIcon icon={faAngleRight} size={22} color="#13807D" style={{ marginRight: 10, marginTop: 9 }} />
+        <FontAwesomeIcon icon={faAngleRight} size={20} color="#13807D" style={{ marginRight: 10, marginTop: 9 }} />
       </View>
       <GameRoulet games={randomGames} navigateToDetails={navigateToDetails} />
     </ScrollView>
