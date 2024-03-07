@@ -3,15 +3,24 @@ import { ScrollView, Text, View, TextInput, Image, StyleSheet, TouchableOpacity 
 import { getAllGames } from '../services/api/games/request'
 import GameComponent from '../components/GameComponent'
 import Header from '../components/Header'
+import { Ionicons } from '@expo/vector-icons'
 import { Game } from '../types/types'
 import { cat, useBearStore, useCategoryStore } from '../store/StoreOption'
 import { getGamesGenre } from '../services/api/games/request_genre'
 
 const styles = StyleSheet.create({
   searchInput: {
+    marginTop: 20,
     backgroundColor: '#483067',
     width: 270,
-    height: 28
+    height: 28,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginLeft: '17%'
   },
   background: {
     backgroundColor: '#271C4D',
@@ -22,17 +31,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 10,
     alignSelf: 'center',
-    margin: 1,
-    width: 110
+    alignContent: 'center',
+    margin: 2,
+    width: 110,
+    height: 45
   },
   Text: {
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
+    fontSize: 14
   },
-  cat: {},
+  cat: {
+    height: 50,
+    backgroundColor: '#110A20'
+  },
   title: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 25,
     textAlign: 'center',
     marginTop: 30,
     fontWeight: 'bold'
@@ -47,20 +62,14 @@ export default function Games({ navigation }: { navigation: any }) {
 
   useEffect(() => {
     async function fetchGames() {
-      // let fetchedGames: Game[] = []
-
       if (category !== 'all') {
-        console.log('retr')
         getGamesGenre(category).then((data) => setGames(data))
       } else {
-        // fetchedGames = await getAllGames()
-
         getAllGames().then((data) => setGames(data))
       }
     }
 
     fetchGames()
-    console.log({ category })
   }, [category])
 
   const filterByPlatform = (games: Game[]) => {
@@ -70,10 +79,6 @@ export default function Games({ navigation }: { navigation: any }) {
       return games.filter((game) => game.platform === option)
     }
   }
-
-  // const filterByGenre = (games: Game[]) => {
-  //   return games.filter((game) => category === 'all' || game.genre.toLowerCase() === category.toLowerCase())
-  // }
 
   const filterByName = (games: Game[]) => {
     return games.filter((game) => game.title.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -100,14 +105,14 @@ export default function Games({ navigation }: { navigation: any }) {
           ))}
         </ScrollView>
       </View>
-      <View style={{ alignItems: 'center' }}>
+      <View style={styles.searchInput}>
         <TextInput
-          style={styles.searchInput}
           placeholder="Search by name"
           placeholderTextColor={'white'}
           value={searchTerm}
           onChangeText={setSearchTerm}
         />
+        <Ionicons name="search" size={20} color="white" />
       </View>
       <Text style={styles.title}>{category}</Text>
       <GameComponent games={filteredGames} navigateToDetails={navigateToDetails} />

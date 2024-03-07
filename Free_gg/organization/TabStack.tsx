@@ -25,7 +25,6 @@ export const TabStack = () => {
             size = 32
           }
 
-          // You can return any component that you like here!
           return <FontAwesomeIcon icon={iconName} size={size} color={color} />
         },
         tabBarActiveTintColor: '#261858',
@@ -41,7 +40,7 @@ export const TabStack = () => {
         }
       })}
     >
-      <Tab.Screen name="Home"  component={HomeStack} />
+      <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="Games" component={GamesStack} />
       <Tab.Screen name="Option" component={OptionStack} />
     </Tab.Navigator>
