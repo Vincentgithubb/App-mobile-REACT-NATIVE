@@ -85,7 +85,6 @@ export default function Games({ navigation }: { navigation: any }) {
   }
 
   const filteredGames = filterByName(filterByPlatform(games))
-  console.log({ filteredGames })
 
   const navigateToDetails = (id: number) => {
     navigation.navigate('Details', { id })
