@@ -16,7 +16,6 @@ const styles = StyleSheet.create({
     height: 28,
     borderRadius: 10,
     paddingHorizontal: 10,
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -109,6 +108,7 @@ export default function Games({ navigation }: { navigation: any }) {
           placeholder="Search by name"
           placeholderTextColor={'white'}
           value={searchTerm}
+          style={{ color: 'white' }}
           onChangeText={setSearchTerm}
         />
         <Ionicons name="search" size={20} color="white" />
